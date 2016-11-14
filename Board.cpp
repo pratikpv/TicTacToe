@@ -19,7 +19,7 @@ Board::Board(Player *p1,  Player *p2) {
 	for(int i = 0 ; i < BOARD_SIZE ; i ++ )
 		template_board[i] = '0' + i ;
 	winner = NULL;
-	turn = player1;
+	turn = player2;
 
 }
 
@@ -50,8 +50,8 @@ void Board::draw_board( char *template_board) {
 
 void Board::show_welcome_messages() {
 
-	cout << "\nWelcome to Tic-Tac-Toe!\nBelow is the sample board with positions. "
-		<<	"Valid positions are from 0 to 8";
+	cout << "\nWelcome to Tic-Tac-Toe!\n\nBelow is the sample board with positions. "
+		<<	"Valid positions are from 0 to 8\n";
 	draw_board(Board::template_board);
 	cout << "\nSo lets get started. Here is your play ground\n";
 
@@ -60,7 +60,7 @@ bool Board::is_game_over() {
 
 	int space_avail = false;
 
-	// check if anybody won
+	/* check if anybody won */
 
 	if (
 		((board_area[0] == board_area[1])
@@ -95,13 +95,13 @@ bool Board::is_game_over() {
 			&& (board_area[4] == board_area[2])
 				&& (board_area[2] == turn->get_ticker() )
 		)
-		){
+		) {
 
 		winner = turn;
 		return true;
 	}
 
-	// check for any space left on the board
+	/* check for any space left on the board */
 
 	for (int i = 0; i < BOARD_SIZE; i++) {
 		if ((board_area[i] != player1->get_ticker())
@@ -123,11 +123,19 @@ void Board::declare_winner() {
 		cout << " The winner is player " <<  winner->get_ticker() << "\n";
 	else
 		cout << " Its tie\n";
+
 }
 
 void Board::make_board_move() {
 
 	turn->make_player_move();
+
+}
+
+char * Board::get_board_area() {
+	
+	return board_area;
+
 }
 
 void Board::toggle_player_turn() {
@@ -138,6 +146,7 @@ void Board::toggle_player_turn() {
 		turn = player1;
 
 }
+
 int Board::validate_move(int move) {
 
 	if (!(move >= 0 && move <= BOARD_SIZE - 1))
@@ -150,7 +159,7 @@ int Board::validate_move(int move) {
 }
 
 void Board::set_move(int move) {
-
+	
 	board_area[move] = turn->get_ticker();
 
 }

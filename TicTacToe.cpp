@@ -7,8 +7,8 @@ using namespace std;
 
 int main() {
 
-	Player p1 = Player(COMPUTER, 'X');
-	Player p2 = Player(HUMAN, 'O');
+	Player p1 = Player(HUMAN, 'O');
+	Player p2 = Player(COMPUTER, 'X');
 	Board board = Board(&p1,&p2);
 
 	board.show_welcome_messages();
@@ -24,4 +24,5 @@ int main() {
 	
 	board.declare_winner();
 	return 0;
+
 }

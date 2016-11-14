@@ -1,7 +1,7 @@
 #ifndef __BOARD_H_INCLUDED
 #define __BOARD_H_INCLUDED
 
-// Forward declaration
+/* Forward declaration */
 class Player;
 
 #include <cstring>
@@ -10,7 +10,7 @@ class Player;
 #include "common.hpp"
 
 #define BOARD_SIZE	9
-#define INIT_CHAR		' '
+#define INIT_CHAR	' '
 
 class Board {
 
@@ -21,10 +21,10 @@ private:
 	Player *player1;
 	Player *player2;
 	Player *winner;
-	Player *turn;
 
 public:
 
+	Player *turn;
 	enum BOARD_ERROR {
 		NO_ERROR = 0, OUT_OF_BOARD, ALREADY_USED_SPACE
 	};
@@ -40,6 +40,7 @@ public:
 	void set_move(int move);
 	Player *get_last_player();
 	void toggle_player_turn();
+	char * get_board_area();
 
 };
 
