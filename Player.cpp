@@ -7,8 +7,9 @@ class Board;
 #include <cstring>
 #include <iostream>
 #include "cstdlib"
-#include "common.hpp"
 #include "Permutation3.hpp"
+#include <limits>
+#include "Bcurses.hpp"
 
 Player::Player(PLAYER_TYPE player_t, char ticker) {
 
@@ -41,16 +42,20 @@ void Player::set_board(Board *board) {
 void Player::make_player_move() {
 
 	int valid_move = Board::OUT_OF_BOARD;
-
+	string s;
 	if (board) {
-
 		if (player_t == HUMAN) {
 
 			while (valid_move != Board::NO_ERROR) {
-
-				cout << "\nHello Player ( " << ticker
-					<< " ) , enter the position number for your move : ";
-				cin >> move;
+				s = "Hello Player ( ";
+				s += get_ticker();
+				s += " ) , enter the position number for your move : ";
+				Bcurses::cout_sameline(s);
+				while(!(cin >> move)){
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					//cout << "\nInvalid input. Enter only number : ";
+				}
 
 				valid_move = board->validate_move(move);
 
@@ -61,22 +66,31 @@ void Player::make_player_move() {
 						break;
 					
 					case Board::ALREADY_USED_SPACE:
-						cout << "Invalid move. " << move
-							<< " is already played. Try again\n";
+						s = "Invalid move. ";
+						s += move;
+						s += " is already played. Try again";
+						Bcurses::cout_sameline(s);
 						break;
 					
 					case Board::OUT_OF_BOARD:
-						cout << "Invalid move. " << move
-							<< " is out of board area. Enter any value from 0 to 8. Try again\n";
+                                                s = "Invalid move. ";
+                                                s += move;
+                                                s += "is out of board area. Enter any value from 0 to 8. Try again";
+                                                Bcurses::cout_sameline(s);
 						break;
 					
 					default:
-						cout << "Invalid move. Try again\n";
+                                                s = "Invalid move. ";
+                                                s += valid_move;
+                                                s += "Try again";
+						Bcurses::cout_sameline(s);
+						break;
 				}
 			}
 		} else {
-		
-			cout << "\nIts computer's turn, and the computer makes move now :";
+                        s = "Its computer's turn, and the computer makes move now";
+                        Bcurses::cout_sameline(s);
+
 			/* Lets think how we can apply artificial intelligence*/
 
 			Player *list[2] = {  board->turn ,/* first see if Comupter can win*/

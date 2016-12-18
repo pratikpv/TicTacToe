@@ -7,7 +7,7 @@ class Board;
 #include <cstring>
 #include <iostream>
 #include "cstdlib"
-#include "common.hpp"
+#include "Common.hpp"
 
 class Player {
 

@@ -5,7 +5,7 @@ using namespace std;
 #include <cstring>
 #include <iostream>
 #include "cstdlib"
-#include "common.hpp"
+#include "Bcurses.hpp"
 
 Board::Board(Player *p1,  Player *p2) {
 
@@ -23,16 +23,39 @@ Board::Board(Player *p1,  Player *p2) {
 
 }
 
-void Board::draw_board( ) {
+void Board::draw_board(bool clear) {
 
-	cout << "\n " << board_area[0] << " | " << board_area[1] << " | "
-			<< board_area[2];
-	cout << "\n-----------";
-	cout << "\n " << board_area[3] << " | " << board_area[4] << " | "
-			<< board_area[5];
-	cout << "\n-----------";
-	cout << "\n " << board_area[6] << " | " << board_area[7] << " | "
-			<< board_area[8] << "\n";
+	char cpt = turn->get_ticker();
+
+	if (clear)
+		Bcurses::Erase_lines(Bcurses::ERASE_BOARD);
+
+	cout << "\n "
+		<< Bcurses::BColor(board_area[0], cpt)
+		<< Bcurses::BColor(" | ")
+		<< Bcurses::BColor(board_area[1], cpt)
+		<< Bcurses::BColor(" | ")
+		<< Bcurses::BColor(board_area[2], cpt);
+
+	cout << "\n"
+		<< Bcurses::BColor("-----------");
+
+	cout << "\n "
+		<< Bcurses::BColor(board_area[3], cpt)
+		<< Bcurses::BColor(" | ")
+		<< Bcurses::BColor(board_area[4], cpt)
+		<< Bcurses::BColor(" | ")
+		<< Bcurses::BColor(board_area[5], cpt);
+
+	cout << "\n" << Bcurses::BColor("-----------");
+
+	cout << "\n "
+		<< Bcurses::BColor(board_area[6], cpt)
+		<< Bcurses::BColor(" | ")
+		<< Bcurses::BColor(board_area[7], cpt)
+		<< Bcurses::BColor(" | ")
+		<< Bcurses::BColor(board_area[8], cpt);
+	cout << "\n\n";
 
 }
 
@@ -120,7 +143,10 @@ bool Board::is_game_over() {
 void Board::declare_winner() {
 
 	if (winner)
-		cout << " The winner is player " <<  winner->get_ticker() << "\n";
+		cout << " The winner is player "
+			<<  Bcurses::BColor(winner->get_ticker(),
+					winner->get_ticker())
+			<< "\n";
 	else
 		cout << " Its tie\n";
 

@@ -7,7 +7,8 @@ class Player;
 #include <cstring>
 #include <iostream>
 #include "cstdlib"
-#include "common.hpp"
+#include "Common.hpp"
+#include <string>
 
 #define BOARD_SIZE	9
 #define INIT_CHAR	' '
@@ -21,6 +22,8 @@ private:
 	Player *player1;
 	Player *player2;
 	Player *winner;
+	string BColor(string c);
+	string BColor(char  c);
 
 public:
 
@@ -30,7 +33,7 @@ public:
 	};
 
 	Board(Player *player1, Player *player2);
-	void draw_board();
+	void draw_board(bool clear=true);
 	void draw_board(char *template_board);
 	void show_welcome_messages();
 	bool is_game_over();

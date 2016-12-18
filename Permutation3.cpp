@@ -2,7 +2,6 @@ using namespace std;
 
 #include <iostream>
 #include "Permutation3.hpp"
-#include "common.hpp"
 #include "Board.hpp"
 #include "Player.hpp"
 

@@ -1,7 +1,7 @@
 #ifndef __PERMUTATION3_H_INCLUDED
 #define __PERMUTATION3_H_INCLUDED
 
-#include "common.hpp"
+#include "Common.hpp"
 
 class Permutation3 {
 
