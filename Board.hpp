@@ -44,7 +44,7 @@ public:
 	Player *get_last_player();
 	void toggle_player_turn();
 	char * get_board_area();
-
+	void redraw();
 };
 
 #endif

@@ -27,18 +27,14 @@ void Board::draw_board(bool clear) {
 
 	char cpt = turn->get_ticker();
 
-	if (clear)
-		Bcurses::Erase_lines(Bcurses::ERASE_BOARD);
-
-	cout << "\n "
+	cout << " "
 		<< Bcurses::BColor(board_area[0], cpt)
 		<< Bcurses::BColor(" | ")
 		<< Bcurses::BColor(board_area[1], cpt)
 		<< Bcurses::BColor(" | ")
 		<< Bcurses::BColor(board_area[2], cpt);
 
-	cout << "\n"
-		<< Bcurses::BColor("-----------");
+	cout << "\n" << Bcurses::BColor("-----------");
 
 	cout << "\n "
 		<< Bcurses::BColor(board_area[3], cpt)
@@ -76,7 +72,7 @@ void Board::show_welcome_messages() {
 	cout << "\nWelcome to Tic-Tac-Toe!\n\nBelow is the sample board with positions. "
 		<<	"Valid positions are from 0 to 8\n";
 	draw_board(Board::template_board);
-	cout << "\nSo lets get started. Here is your play ground\n";
+	cout << "\nSo lets get started. Here is your play ground\n\n";
 
 }
 bool Board::is_game_over() {
@@ -137,6 +133,13 @@ bool Board::is_game_over() {
 		return false;
 	else
 		return true;
+
+}
+void Board::redraw() {
+
+	cout << "\033[2J\033[1;1H";
+	show_welcome_messages();
+	draw_board();
 
 }
 

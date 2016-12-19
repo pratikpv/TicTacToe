@@ -50,11 +50,11 @@ void Player::make_player_move() {
 				s = "Hello Player ( ";
 				s += get_ticker();
 				s += " ) , enter the position number for your move : ";
-				Bcurses::cout_sameline(s);
+				cout << s ;
 				while(!(cin >> move)){
 					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					//cout << "\nInvalid input. Enter only number : ";
+					cout << "\nInvalid input. Enter only number : ";
 				}
 
 				valid_move = board->validate_move(move);
@@ -68,29 +68,28 @@ void Player::make_player_move() {
 					case Board::ALREADY_USED_SPACE:
 						s = "Invalid move. ";
 						s += move;
-						s += " is already played. Try again";
-						Bcurses::cout_sameline(s);
+						s += " is already played. Try again\n";
+						cout << s;
 						break;
 					
 					case Board::OUT_OF_BOARD:
                                                 s = "Invalid move. ";
                                                 s += move;
-                                                s += "is out of board area. Enter any value from 0 to 8. Try again";
-                                                Bcurses::cout_sameline(s);
+                                                s += "is out of board area. Enter any value from 0 to 8. Try again\n";
+                                                cout << s;
 						break;
 					
 					default:
                                                 s = "Invalid move. ";
-                                                s += valid_move;
-                                                s += "Try again";
-						Bcurses::cout_sameline(s);
+                                                s += move;
+                                                s += "Try again\n";
+						cout << s;
 						break;
 				}
 			}
 		} else {
-                        s = "Its computer's turn, and the computer makes move now";
-                        Bcurses::cout_sameline(s);
-
+                        s = "Its computer's turn, and the computer makes move now\n";
+			cout << s;
 			/* Lets think how we can apply artificial intelligence*/
 
 			Player *list[2] = {  board->turn ,/* first see if Comupter can win*/
@@ -181,7 +180,7 @@ void Player::make_player_move() {
 		} 
 	} else {
 		
-		cout << "Board not set for player";
+		//cout << "Board not set for player";
 		exit(-1);
 	}
 }

@@ -24,7 +24,6 @@ public:
 	static string BColor(string c);
 	static string BColor(char c, char cpt);
 	static void Erase_lines(int num);
-	static void cout_sameline(string s);
 
 };
 

@@ -16,7 +16,7 @@ const string Bcurses::KWHT = "\x1B[38m";
 const string Bcurses::PLAY1_COLOR = KYEL;
 const string Bcurses::PLAY2_COLOR = KCYN;
 const string Bcurses::BOARD_COLOR = KWHT;
-const int Bcurses::ERASE_BOARD = 6;
+const int Bcurses::ERASE_BOARD = 0;
 
 string Bcurses::BColor(std::string c) {
 
@@ -44,13 +44,5 @@ string Bcurses::BColor(char c, char cpt) {
 void Bcurses::Erase_lines(int num) {
 
 	for (int i = 0 ;i < num ; i++ )
-		cout << "\033[A\33[2K\r" ;
-
+		cout << "\33[2K\r\033[A" ;
 }
-
-void Bcurses :: cout_sameline(string s) {
-
-	cout << "\033[A\33[2K\r" << s ;
-
-}
-
