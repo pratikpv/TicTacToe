@@ -11,13 +11,14 @@ int main() {
 	Player p2 = Player(COMPUTER, 'X');
 	Board board = Board(&p1,&p2);
 
+	board.set_up_difficulty_level();
 	while( !board.is_game_over() ) {
-		board.redraw();
+		board.re_draw();
 		board.toggle_player_turn();
 		board.make_board_move();
 	}
 
-	board.redraw();
+	board.re_draw();
 	board.declare_winner();
 	return 0;
 

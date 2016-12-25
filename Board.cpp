@@ -23,6 +23,28 @@ Board::Board(Player *p1,  Player *p2) {
 
 }
 
+void Board::set_up_difficulty_level() {
+
+	do {
+
+		cout << "\033[2J\033[1;1H";
+		show_welcome_messages();
+		cout << "\nEnter Difficulty level\n\n1.Easy\n2.Intermediate\n3.Advanced\n";
+		while( !(cin >> difficulty_level)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	                cout << "\nInvalid input. Enter only number between 1 to 3: ";
+		}
+
+	} while ((difficulty_level <= 0 ) || (difficulty_level >= 4));
+
+}
+
+int Board::get_difficulty_level() {
+
+        return difficulty_level;
+
+}
 void Board::draw_board(bool clear) {
 
 	char cpt = turn->get_ticker();
@@ -69,8 +91,9 @@ void Board::draw_board( char *template_board) {
 
 void Board::show_welcome_messages() {
 
-	cout << "\nWelcome to Tic-Tac-Toe!\n\nBelow is the sample board with positions. "
-		<<	"Valid positions are from 0 to 8\n";
+	cout << "\nWelcome to Tic-Tac-Toe!"
+		<< "\n\nBelow is the sample board with positions. "
+		<< "Valid positions are from 0 to 8\n";
 	draw_board(Board::template_board);
 	cout << "\nSo lets get started. Here is your play ground\n\n";
 
@@ -135,7 +158,7 @@ bool Board::is_game_over() {
 		return true;
 
 }
-void Board::redraw() {
+void Board::re_draw() {
 
 	cout << "\033[2J\033[1;1H";
 	show_welcome_messages();

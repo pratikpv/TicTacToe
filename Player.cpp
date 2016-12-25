@@ -66,8 +66,8 @@ void Player::make_player_move() {
 						break;
 					
 					case Board::ALREADY_USED_SPACE:
-						s = "Invalid move. ";
-						s += move;
+						s = "Invalid move. Location ";
+						s += std::to_string(move);
 						s += " is already played. Try again\n";
 						cout << s;
 						break;
@@ -90,7 +90,23 @@ void Player::make_player_move() {
 		} else {
                         s = "Its computer's turn, and the computer makes move now\n";
 			cout << s;
-			/* Lets think how we can apply artificial intelligence*/
+
+			if (board->get_difficulty_level() == Board::EASY) {
+
+				/* For easy level get the move randomly*/
+				std::srand(time(0));
+				int move;
+
+				do {
+					move = std::rand() % 9 ;
+				} while (board->validate_move(move) != Board::NO_ERROR );
+
+				board->set_move(move);
+
+				return;
+			}
+
+			/* Lets think how we can apply artificial intelligence */
 
 			Player *list[2] = {  board->turn ,/* first see if Comupter can win*/
 					      board->get_last_player() /*this time check if we can defend*/
@@ -98,7 +114,7 @@ void Player::make_player_move() {
 			int **p;
 			int diagonal_back[3] = { 0, 4, 8 };
 			int diagonal_forward[3] = { 2, 4, 6 };
-			
+
 			for(int player_turn = 0; player_turn < 2 ; player_turn ++ ) {
 			
 				/* vertical */
@@ -167,20 +183,38 @@ void Player::make_player_move() {
 				}
 			}
 
-			/* make preffered moves. */
+			/* for intermediate level, we just checked if we can defend or we have best
+			 * chance to win by filling the only one remaining position.
+			 * if we cant do either of that then lets just get a ramdom position for fill
+			 */
+			if (board->get_difficulty_level() == Board::INTERMEDIATE) {
+
+				std::srand(time(0));
+				int move;
+
+				do {
+					move = std::rand() % 9 ;
+				} while (board->validate_move(move) != Board::NO_ERROR );
+
+				board->set_move(move);
+
+				return;
+			}
+
+			/* make preffered moves, this sets up advanced moves */
 
 			for( int  i = preffered_move_loc ; i < BOARD_SIZE ; i++) {
 				valid_move = board->validate_move( preffered_move[i]);
 				if (valid_move == Board::NO_ERROR) {
 					board->set_move(preffered_move[i]);
-					preffered_move_loc = i ++;
+					preffered_move_loc = i++;
 					return;
 				}
 			}
 		} 
 	} else {
 		
-		//cout << "Board not set for player";
+		cout << "Board not set for player";
 		exit(-1);
 	}
 }

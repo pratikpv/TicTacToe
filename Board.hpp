@@ -24,12 +24,16 @@ private:
 	Player *winner;
 	string BColor(string c);
 	string BColor(char  c);
-
+	int difficulty_level;
 public:
 
 	Player *turn;
 	enum BOARD_ERROR {
 		NO_ERROR = 0, OUT_OF_BOARD, ALREADY_USED_SPACE
+	};
+
+	enum DIFFICULTY_LEVEL {
+		EASY = 1, INTERMEDIATE, ADVANCED
 	};
 
 	Board(Player *player1, Player *player2);
@@ -44,7 +48,9 @@ public:
 	Player *get_last_player();
 	void toggle_player_turn();
 	char * get_board_area();
-	void redraw();
+	void re_draw();
+	void set_up_difficulty_level();
+	int get_difficulty_level();
 };
 
 #endif

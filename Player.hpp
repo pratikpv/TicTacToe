@@ -8,6 +8,7 @@ class Board;
 #include <iostream>
 #include "cstdlib"
 #include "Common.hpp"
+#include <random>
 
 class Player {
 
