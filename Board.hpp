@@ -25,6 +25,7 @@ private:
 	string BColor(string c);
 	string BColor(char  c);
 	int difficulty_level;
+
 public:
 
 	Player *turn;
@@ -51,6 +52,7 @@ public:
 	void re_draw();
 	void set_up_difficulty_level();
 	int get_difficulty_level();
+	void get_players_name();
 };
 
 #endif

@@ -20,6 +20,16 @@ Board::Board(Player *p1,  Player *p2) {
 		template_board[i] = '0' + i ;
 	winner = NULL;
 	turn = player2;
+}
+
+void Board::get_players_name() {
+
+	char name[MAX_NAME];
+	cout << "\033[2J\033[1;1H";
+	show_welcome_messages();
+	cout << "\nEnter your name :";
+	cin >> name;
+	player1->set_name(name);
 
 }
 
@@ -91,13 +101,15 @@ void Board::draw_board( char *template_board) {
 
 void Board::show_welcome_messages() {
 
-	cout << "\nWelcome to Tic-Tac-Toe!"
+	cout << "\nWelcome to Tic-Tac-Toe, "
+		<< player1->get_name()
 		<< "\n\nBelow is the sample board with positions. "
 		<< "Valid positions are from 0 to 8\n";
 	draw_board(Board::template_board);
 	cout << "\nSo lets get started. Here is your play ground\n\n";
 
 }
+
 bool Board::is_game_over() {
 
 	int space_avail = false;
@@ -169,12 +181,15 @@ void Board::re_draw() {
 void Board::declare_winner() {
 
 	if (winner)
-		cout << " The winner is player "
+		cout << "The winner is "
+			<< winner->get_name()
+			<< " ( "
 			<<  Bcurses::BColor(winner->get_ticker(),
 					winner->get_ticker())
+			<< " )"
 			<< "\n";
 	else
-		cout << " Its tie\n";
+		cout << "Its tie\n";
 
 }
 

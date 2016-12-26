@@ -2,5 +2,6 @@
 #define __COMMON_H_INCLUDED
 
 enum PLAYER_TYPE { HUMAN, COMPUTER };
+#define MAX_NAME 25
 
 #endif

@@ -18,7 +18,10 @@ Player::Player(PLAYER_TYPE player_t, char ticker) {
 	board = NULL;
 	move = -1;
 	preffered_move_loc = 0;
-
+	if ( player_t == COMPUTER )
+	        strcpy(this->name,"COMPUTER");
+	else
+                strcpy(this->name,"HUMAN");
 }
 
 PLAYER_TYPE Player::get_player_type() {
@@ -30,6 +33,17 @@ PLAYER_TYPE Player::get_player_type() {
 char Player::get_ticker() {
 
 	return ticker;
+
+}
+
+void Player::set_name(char *n) {
+
+	strncpy(name, n, MAX_NAME);
+}
+
+char * Player::get_name() {
+
+	return name;
 
 }
 
@@ -47,7 +61,9 @@ void Player::make_player_move() {
 		if (player_t == HUMAN) {
 
 			while (valid_move != Board::NO_ERROR) {
-				s = "Hello Player ( ";
+				s = "Hello ";
+				s += get_name();
+				s += " ( ";
 				s += get_ticker();
 				s += " ) , enter the position number for your move : ";
 				cout << s ;
