@@ -2,7 +2,7 @@
 
 * A toy program for the Tic-Tac-Toe game
 * play manually or against the computer
-* computer-mode game is programmed to take actions based upon know best-strategy 
+* computer-mode game is programmed to take actions based upon best-known-strategies (rule-based intelligence)
 
 
 Sample output 
